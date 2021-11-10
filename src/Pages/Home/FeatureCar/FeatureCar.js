@@ -4,9 +4,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { ModelTrainingRounded } from '@mui/icons-material';
 import { Button, Link } from '@mui/material';
-import { NavLink } from 'react-router-dom';
 
 
 const FeatureCar = (props) => {

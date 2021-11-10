@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { Container, Divider } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import FeatureCar from '../FeatureCar/FeatureCar';
+import FeatureCar from '../Home/FeatureCar/FeatureCar';
 
 const cars = [
     {
@@ -56,7 +56,7 @@ const cars = [
     },
 ]
 
-const FeatureCars = () => {
+const AllCars = () => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Container sx={{ textAlign: 'center', my: 5 }}>
@@ -70,7 +70,7 @@ const FeatureCars = () => {
                 <Divider sx={{ width: '150px', p: 0, m: '2px auto', border: '1px solid red' }} />
                 <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                     {
-                        cars.slice(0, 6).map(car => <FeatureCar
+                        cars.map(car => <FeatureCar
                             key={car.id}
                             car={car}
                         ></FeatureCar>)
@@ -81,4 +81,4 @@ const FeatureCars = () => {
     );
 };
 
-export default FeatureCars;
+export default AllCars;
