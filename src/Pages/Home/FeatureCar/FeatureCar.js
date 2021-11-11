@@ -8,7 +8,7 @@ import { Button, Link } from '@mui/material';
 
 
 const FeatureCar = (props) => {
-    const { model, oldPrice, newPrice, details, img } = props.car;
+    const { _id, model, oldPrice, newPrice, details, img } = props.car;
     return (
         <Grid item sx={{ mt: 5 }} xs={4} sm={4} md={4}>
             <Card sx={{ minWidth: 275 }}>
@@ -28,7 +28,7 @@ const FeatureCar = (props) => {
 
                     {/* <NavLink to='/buyNow'><Button style={{ textDecoration: 'none' }}>Buy Now</Button></NavLink> */}
 
-                    <Link href="/buyNow" sx={{ width: '150px' }} underline="none">
+                    <Link href={`/buyNow/${_id}`} sx={{ width: '150px' }} underline="none">
                         <Button style={{ textDecoration: 'none', backgroundColor: '#cf2626d6', color: 'white', width: '100px' }}>Buy Now</Button>
                     </Link>
 

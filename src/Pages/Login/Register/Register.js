@@ -12,25 +12,27 @@ const bgImage = {
 }
 
 const Register = () => {
-    // const [loginData, setLoginData] = useState({});
-    // const history = useHistory();
+    const [loginData, setLoginData] = useState({});
+    const history = useHistory();
 
-    // const { user, registerUser, isLoading, authError } = useAuth();
+    const { user, registerUser, isLoading, authError } = useAuth();
+    // const { user, registerUser, isLoading } = useAuth();
 
     const handleOnBlur = e => {
-        // const field = e.target.name;
-        // const value = e.target.value;
-        // const newLoginData = { ...loginData };
-        // newLoginData[field] = value;
-        // setLoginData(newLoginData);
+        const field = e.target.name;
+        const value = e.target.value;
+        const newLoginData = { ...loginData };
+        newLoginData[field] = value;
+        setLoginData(newLoginData);
     }
 
     const handleLoginSubmit = e => {
-        // if (loginData.password1 !== loginData.password2) {
-        //     alert("Your password didn't match");
-        //     return;
-        // }
-        // registerUser(loginData.email, loginData.password1, loginData.name, history);
+        if (loginData.password1 !== loginData.password2) {
+            alert("Your password didn't match");
+            return;
+        }
+        registerUser(loginData.email, loginData.password1, loginData.name, history);
+        // registerUser(loginData.email, loginData.password1, history);
 
         e.preventDefault();
     }
@@ -39,22 +41,19 @@ const Register = () => {
 
         <Grid style={bgImage} container spacing={2} sx={{ mt: 0, zIndex: 0 }}>
             <Grid item xs={12} md={12}>
-                <Container sx={{ width: '50%', backgroundColor: '#ff000085', textAlign: 'center', color: 'white', marginTop: '50px', py: 5 }}>
+                <Container sx={{ width: '50%', backgroundColor: '#ffffff52', textAlign: 'center', color: 'white', marginTop: '50px', py: 5 }}>
                     <Typography variant="h4" gutterBottom component="div">
                         Please, Complete Your Registration
                     </Typography>
 
-                    {/* {!isLoading &&  */}
-
-                    <form onSubmit={handleLoginSubmit}>
-
+                    {!isLoading && <form onSubmit={handleLoginSubmit}>
                         <TextField
                             sx={{ width: '75%', m: 1 }}
                             id="standard-basic"
                             label="Your Name"
                             type="text"
                             name="name"
-                            onBlur={handleOnBlur}
+                            onChange={handleOnBlur}
                             variant="standard"
                         />
                         <TextField
@@ -63,7 +62,7 @@ const Register = () => {
                             label="Your Email"
                             type="email"
                             name="email"
-                            onBlur={handleOnBlur}
+                            onChange={handleOnBlur}
                             variant="standard"
                         />
 
@@ -73,7 +72,7 @@ const Register = () => {
                             label="Your password"
                             type="password"
                             name="password1"
-                            onBlur={handleOnBlur}
+                            onChange={handleOnBlur}
                             variant="standard"
                         />
                         <TextField
@@ -82,7 +81,7 @@ const Register = () => {
                             label="Confirm Your password"
                             type="password"
                             name="password2"
-                            onBlur={handleOnBlur}
+                            onChange={handleOnBlur}
                             variant="standard"
                         />
 
@@ -94,12 +93,11 @@ const Register = () => {
                             <Button sx={{ color: 'white' }} variant="text">Already Registered? Please Login</Button>
                         </NavLink>
 
-                    </form>
-                    {/* } */}
+                    </form>}
 
-                    {/* {isLoading && <CircularProgress />}
-                    {user?.email && <Alert severity="success">Login successfully!</Alert>}
-                    {authError && <Alert severity="error">{authError}</Alert>} */}
+                    {isLoading && <CircularProgress />}
+                    {user?.email && <Alert severity="success">Successfully Registered!</Alert>}
+                    {authError && <Alert severity="error">{authError}</Alert>}
                 </Container>
             </Grid>
 

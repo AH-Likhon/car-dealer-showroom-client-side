@@ -12,27 +12,28 @@ const bgImage = {
 }
 
 const Login = () => {
-    // const [loginData, setLoginData] = useState({});
-    // const { user, loginUser, isLoading, authError, signInWithGoogle } = useAuth();
+    const [loginData, setLoginData] = useState({});
+    const { user, loginUser, isLoading, authError, signInWithGoogle } = useAuth();
 
-    // const location = useLocation();
-    // const history = useHistory();
+    const location = useLocation();
+    const history = useHistory();
 
     const handleOnChange = e => {
-        // const field = e.target.name;
-        // const value = e.target.value;
-        // const newLoginData = { ...loginData };
-        // newLoginData[field] = value;
-        // setLoginData(newLoginData);
+        const field = e.target.name;
+        const value = e.target.value;
+        const newLoginData = { ...loginData };
+        newLoginData[field] = value;
+        setLoginData(newLoginData);
     }
 
     const handleLogin = e => {
-        // loginUser(loginData.email, loginData.password, location, history);
-        // e.preventDefault();
+        loginUser(loginData.email, loginData.password, location, history);
+        // loginUser(loginData.email, loginData.password);
+        e.preventDefault();
     }
 
     const handleGoogleSignIn = () => {
-        // signInWithGoogle(location, history);
+        signInWithGoogle(location, history);
     }
 
     return (
@@ -44,9 +45,7 @@ const Login = () => {
                         Please, Login
                     </Typography>
 
-                    {/* {!isLoading &&  */}
-
-                    <form onSubmit={handleLogin}>
+                    {!isLoading && <form onSubmit={handleLogin}>
 
                         <TextField
                             sx={{ width: '75%', m: 1 }}
@@ -62,7 +61,7 @@ const Login = () => {
                             id="standard-basic"
                             label="Your password"
                             type="password"
-                            name="password1"
+                            name="password"
                             onChange={handleOnChange}
                             variant="standard"
                         />
@@ -75,14 +74,13 @@ const Login = () => {
                             <Button sx={{ color: 'white' }} variant="text">New User? Please Register</Button>
                         </NavLink>
 
-                    </form>
-                    {/* } */}
+                    </form>}
 
                     <Button onClick={handleGoogleSignIn} variant="contained">Sign in with google</Button>
 
-                    {/* {isLoading && <CircularProgress />}
+                    {isLoading && <CircularProgress />}
                     {user?.email && <Alert severity="success">Login successfully!</Alert>}
-                    {authError && <Alert severity="error">{authError}</Alert>} */}
+                    {authError && <Alert severity="error">{authError}</Alert>}
                 </Container>
             </Grid>
 

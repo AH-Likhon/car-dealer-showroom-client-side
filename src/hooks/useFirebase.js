@@ -1,141 +1,148 @@
-// import { useEffect, useState } from 'react';
-// import initializeFirebase from "../Pages/Login/Firebase/firebase.init";
-// import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut, updateProfile, getIdToken } from "firebase/auth";
+import { useEffect, useState } from 'react';
+import initializeFirebase from "../Pages/Login/Firebase/firebase.init";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut, updateProfile, getIdToken } from "firebase/auth";
 
 
 // // initialize firebase app
-// initializeFirebase();
+initializeFirebase();
 
-// const useFirebase = () => {
-//     const [user, setUser] = useState({});
-//     const [isLoading, setIsLoading] = useState(true);
-//     const [authError, setAuthError] = useState('');
-//     const [admin, setAdmin] = useState(false);
-//     const [token, setToken] = useState('');
+const useFirebase = () => {
+    const [user, setUser] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
+    const [authError, setAuthError] = useState('');
+    //     const [admin, setAdmin] = useState(false);
+    //     const [token, setToken] = useState('');
 
-//     const auth = getAuth();
-//     const googleProvider = new GoogleAuthProvider();
+    const auth = getAuth();
+    const googleProvider = new GoogleAuthProvider();
 
-//     const registerUser = (email, password, name, history) => {
-//         setIsLoading(true);
+    const registerUser = (email, password, name, history) => {
+        // history
+        setIsLoading(true);
 
-//         createUserWithEmailAndPassword(auth, email, password)
-//             .then((userCredential) => {
-//                 setAuthError('');
-//                 const newUser = { email, displayName: name };
-//                 setUser(newUser);
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                setAuthError('');
 
-//                 // save data to database
-//                 saveUser(email, name, 'POST');
+                const newUser = { email, displayName: name };
+                setUser(newUser);
+                history.replace('/');
 
-//                 updateProfile(auth.currentUser, {
-//                     displayName: name
-//                 }).then(() => {
-//                     // Profile updated!
-//                     // ...
-//                 }).catch((error) => {
-//                     // An error occurred
-//                     // ...
-//                 });
+                // save data to database
+                // saveUser(email, name, 'POST');
 
-//                 history.replace('/');
-//             })
-//             .catch((error) => {
-//                 setAuthError(error.message);
-//                 // console.log(error);
-//             })
-//             .finally(() => setIsLoading(false));
-//     }
+                // updateProfile(auth.currentUser, {
+                //     displayName: name
+            })
+            .catch((error) => {
+                setAuthError(error.message);
+                // console.log(error);
+            })
+            .finally(() => setIsLoading(false));
+        // .then(() => {
+        // Profile updated!
+        // ...
+        // })
+        // .catch((error) => {
+        // An error occurred
+        // ...
+        // });
 
-//     const loginUser = (email, password, location, history) => {
-//         setIsLoading(true);
+        // history.replace('/');
+        // })
 
-//         signInWithEmailAndPassword(auth, email, password)
-//             .then((userCredential) => {
-//                 const destination = location?.state?.from || '/';
-//                 history.replace(destination);
-//                 setAuthError('');
-//             })
-//             .catch((error) => {
-//                 setAuthError(error.message);
-//             })
-//             .finally(() => setIsLoading(false));
-//     }
+        // .finally(() => setIsLoading(false));
+    }
 
-//     const signInWithGoogle = (location, history) => {
-//         setIsLoading(true);
+    const loginUser = (email, password, location, history) => {
+        setIsLoading(true);
 
-//         signInWithPopup(auth, googleProvider)
-//             .then((result) => {
-//                 const user = result.user;
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const destination = location?.state?.from || '/';
+                history.replace(destination);
+                setAuthError('');
+            })
+            .catch((error) => {
+                setAuthError(error.message);
+            })
+            .finally(() => setIsLoading(false));
+    }
 
-//                 saveUser(user.email, user.displayName, 'PUT');
+    const signInWithGoogle = (location, history) => {
+        setIsLoading(true);
 
-//                 const destination = location?.state?.from || '/';
-//                 history.replace(destination);
-//                 setAuthError('');
+        signInWithPopup(auth, googleProvider)
+            .then((result) => {
+                const user = result.user;
 
-//             }).catch((error) => {
-//                 setAuthError(error.message);
-//             }).finally(() => setIsLoading(false));
-//     }
+                // saveUser(user.email, user.displayName, 'PUT');
 
-//     // observe user state
-//     useEffect(() => {
-//         const unSubscribed = onAuthStateChanged(auth, (user) => {
-//             if (user) {
-//                 setUser(user);
-//                 getIdToken(user)
-//                     .then(idToken => setToken(idToken))
-//             } else {
-//                 setUser({});
-//             }
-//             setIsLoading(false);
-//         });
+                const destination = location?.state?.from || '/';
+                history.replace(destination);
+                setAuthError('');
 
-//         return () => unSubscribed;
-//     }, [auth])
+            }).catch((error) => {
+                setAuthError(error.message);
+            }).finally(() => setIsLoading(false));
+    }
 
-//     useEffect(() => {
-//         fetch(`https://immense-fortress-23782.herokuapp.com/users/${user.email}`)
-//             .then(res => res.json())
-//             .then(data => setAdmin(data.admin))
-//     }, [user.email])
+    //     // observe user state
+    useEffect(() => {
+        const unSubscribed = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUser(user);
+                // getIdToken(user)
+                //     .then(idToken => setToken(idToken))
+            } else {
+                setUser({});
+            }
+            setIsLoading(false);
+        });
 
-//     const logOut = () => {
-//         setIsLoading(true);
-//         signOut(auth).then(() => {
-//             // Sign-out successful.
-//         }).catch((error) => {
-//             // An error happened.
-//         })
-//             .finally(() => setIsLoading(false));
-//     }
+        return () => unSubscribed;
+    }, [auth])
 
-//     const saveUser = (email, displayName, method) => {
-//         const user = { email, displayName };
+    //     useEffect(() => {
+    //         fetch(`https://immense-fortress-23782.herokuapp.com/users/${user.email}`)
+    //             .then(res => res.json())
+    //             .then(data => setAdmin(data.admin))
+    //     }, [user.email])
 
-//         fetch('https://immense-fortress-23782.herokuapp.com/users', {
-//             method: method,
-//             headers: {
-//                 'content-type': 'application/json'
-//             },
-//             body: JSON.stringify(user)
-//         })
-//             .then()
-//     }
+    const logOut = () => {
+        setIsLoading(true);
+        signOut(auth).then(() => {
+            // Sign-out successful.
+        }).catch((error) => {
+            // An error happened.
+        })
+            .finally(() => setIsLoading(false));
+    }
 
-//     return {
-//         user,
-//         admin,
-//         token,
-//         registerUser,
-//         loginUser,
-//         signInWithGoogle,
-//         logOut,
-//         isLoading,
-//         authError
-//     }
-// }
+    //     const saveUser = (email, displayName, method) => {
+    //         const user = { email, displayName };
 
-// export default useFirebase;
+    //         fetch('https://immense-fortress-23782.herokuapp.com/users', {
+    //             method: method,
+    //             headers: {
+    //                 'content-type': 'application/json'
+    //             },
+    //             body: JSON.stringify(user)
+    //         })
+    //             .then()
+    //     }
+
+    return {
+        user,
+        // admin,
+        // token,
+        registerUser,
+        loginUser,
+        signInWithGoogle,
+        logOut,
+        isLoading,
+        authError
+    }
+}
+
+export default useFirebase;

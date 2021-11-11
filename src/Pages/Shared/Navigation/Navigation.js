@@ -17,35 +17,81 @@ import { NavLink } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 
 const Navigation = () => {
-    // const { user, logOut } = useAuth();
+    const { user, logOut } = useAuth();
     // const [auth, setAuth] = React.useState(true);
-    // const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = React.useState(null);
 
     // const handleChange = (event) => {
     //     setAuth(event.target.checked);
     // };
 
-    // const handleMenu = (event) => {
-    //     setAnchorEl(event.currentTarget);
-    // };
+    const handleMenu = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
 
-    // const handleClose = () => {
-    //     setAnchorEl(null);
-    // };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
     return (
         <Box sx={{ flexGrow: 1 }}>
 
             <AppBar position="static" sx={{ backgroundColor: '#9BA59D', border: 'none', boxShadow: 'none', color: 'white', overFlow: 'hidden', zIndex: 999 }}>
                 <Toolbar>
+                    <IconButton
+                        size="large"
+                        edge="start"
+                        color="inherit"
+                        aria-label="menu"
+                        sx={{ mr: 2 }}
+                    >
+                        <img src={logo} alt="logo" />
+                    </IconButton>
 
                     <Typography variant="img" component="div" sx={{ flexGrow: 1 }}>
-                        <img src={logo} alt="logo" />
+                        {/* <img src={logo} alt="logo" /> */}
                     </Typography>
 
                     <Link sx={{ color: 'text.primary' }} href="/allCars" underline="none"><Button color="inherit">All Cars</Button></Link>
-                    <Link sx={{ color: 'text.primary' }} href="/about" underline="none"><Button color="inherit">About</Button></Link>
-                    <Link sx={{ color: 'text.primary' }} href="/login" underline="none"><Button color="inherit">Login</Button></Link>
+                    {/* <Link sx={{ color: 'text.primary' }} href="/about" underline="none"><Button color="inherit">About</Button></Link> */}
+                    {
+                        user?.email ?
+                            <Box>
+                                <IconButton
+                                    size="large"
+                                    aria-label="account of current user"
+                                    aria-controls="menu-appbar"
+                                    aria-haspopup="true"
+                                    onClick={handleMenu}
+                                    color="inherit"
+                                >
+                                    <AccountCircle />
+                                </IconButton>
+                                <Menu
+                                    id="menu-appbar"
+                                    sx={{ mt: '28px' }}
+                                    anchorEl={anchorEl}
+                                    anchorOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    keepMounted
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    open={Boolean(anchorEl)}
+                                    onClose={handleClose}
+                                >
+                                    <Link sx={{ color: 'text.primary' }} href="/allCars" underline="none"><Button onClick={handleClose} color="inherit">All Cars</Button></Link> <br />
+                                    <Link sx={{ color: 'text.primary' }} href="/dashboard" underline="none"><Button onClick={handleClose} color="inherit">Dashboard</Button></Link>
+                                    <br />
+                                    <Button onClick={logOut} color="inherit">LogOut</Button>
+                                </Menu>
+                            </Box>
+                            :
+                            <Link sx={{ color: 'text.primary' }} href="/login" underline="none"><Button color="inherit">Login</Button></Link>
+                    }
 
                     {/* {
                         user?.email ?
