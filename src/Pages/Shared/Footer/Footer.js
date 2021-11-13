@@ -30,9 +30,6 @@ const Footer = () => {
                     <Link sx={{ color: 'text.primary' }} href="/" underline="none"><Button color="inherit">Payment Security</Button></Link>
                     <br />
                     <Link sx={{ color: 'text.primary' }} href="/" underline="none"><Button color="inherit">Privacy Policy</Button></Link>
-                    <br />
-                    <Link sx={{ color: 'text.primary' }} href="/" underline="none"><Button color="inherit">FAQ</Button></Link>
-
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
