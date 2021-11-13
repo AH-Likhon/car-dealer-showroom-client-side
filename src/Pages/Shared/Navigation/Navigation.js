@@ -76,6 +76,10 @@ const Navigation = () => {
 
                                     <Link sx={{ color: 'text.primary' }} href="/dashboard" underline="none"><Button onClick={handleClose} color="inherit">{user?.displayName}</Button></Link>
                                     <br />
+
+                                    <Link sx={{ color: 'text.primary' }} href="/" underline="none"><Button onClick={handleClose} color="inherit">Home</Button></Link>
+                                    <br />
+
                                     <Link sx={{ color: 'text.primary' }} href="/dashboard" underline="none"><Button onClick={handleClose} color="inherit">Dashboard</Button></Link>
                                     <br />
 
@@ -85,7 +89,6 @@ const Navigation = () => {
                             :
                             <Link sx={{ color: 'text.primary' }} href="/login" underline="none"><Button color="inherit">Login</Button></Link>
                     }
-
 
                 </Toolbar>
             </AppBar>

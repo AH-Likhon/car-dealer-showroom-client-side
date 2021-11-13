@@ -31,19 +31,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const MyOrders = () => {
-    const { user, token } = useAuth();
+    const { user } = useAuth();
     const [myOrders, setMyOrders] = useState([]);
     console.log(user.email)
 
     useEffect(() => {
         const url = `http://localhost:5000/orders?email=${user.email}`;
-        fetch(url
-            //     ,{
-            //     headers: {
-            //         'authorization': `Bearer ${token}`
-            //     }
-            // }
-        )
+        fetch(url)
             .then(res => res.json())
             .then(data => setMyOrders(data))
     }, [user.email]);
@@ -85,9 +79,6 @@ const MyOrders = () => {
                     <TableBody>
                         {myOrders.map((row) => (
                             <StyledTableRow key={row._id}>
-                                {/* <StyledTableCell align="center" component="th" scope="row">
-                                    {row.name}
-                                </StyledTableCell> */}
                                 <StyledTableCell align="center">{row.email}</StyledTableCell>
                                 <StyledTableCell align="center">{row.model}</StyledTableCell>
                                 <StyledTableCell align="center">{row.status}</StyledTableCell>

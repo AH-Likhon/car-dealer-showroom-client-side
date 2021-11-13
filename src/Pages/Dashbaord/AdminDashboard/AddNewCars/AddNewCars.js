@@ -1,28 +1,14 @@
-import { Box } from '@mui/system';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../../hooks/useAuth';
 import bgImage from '../../../../images/login-bg.png';
-import { Alert, Button, CircularProgress, Container, Grid, TextField, Typography } from '@mui/material';
-
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: '#ffffff52',
-    // border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
+import { Container, Grid, Typography } from '@mui/material';
 
 const backgroundImage = {
     background: `url(${bgImage})`,
     backgroundColor: 'rgba(45, 58, 74, 0.9)',
     backgroundBlendMode: 'darken, luminosity',
-    height: '100vh',
-    // width: '86vw'
+    height: '100vh'
 }
 
 const AddNewCars = () => {
@@ -49,7 +35,7 @@ const AddNewCars = () => {
     return (
         <Grid style={backgroundImage} sx={{ width: '1150px', marginTop: '-24px', marginLeft: '-25px' }} container>
             <Grid item xs={12} md={12}>
-                <Container sx={{ width: '50%', backgroundColor: '#ffffff52', textAlign: 'center', color: 'white', py: 5, mt: 5 }}>
+                <Container sx={{ width: '50%', backgroundColor: '#ffffff52', textAlign: 'center', color: 'white', py: 5, mt: 12 }}>
                     <Typography id="transition-modal-title" variant="h6" component="h2">
                         {/* {name} */}
                         Add A New Car

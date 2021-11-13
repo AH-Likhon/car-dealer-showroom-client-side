@@ -29,8 +29,6 @@ const FeatureCar = (props) => {
                         <span style={{ textDecoration: 'line-through', color: 'red' }}>${oldPrice}</span> <span>${newPrice}</span>
                     </Typography>
 
-                    {/* <NavLink to='/buyNow'><Button style={{ textDecoration: 'none' }}>Buy Now</Button></NavLink> */}
-
                     <Link href={`/buyNow/${_id}`} sx={{ width: '150px' }} underline="none">
                         <Button style={{ textDecoration: 'none', backgroundColor: '#cf2626d6', color: 'white', width: '100px' }}>Buy Now</Button>
                     </Link>

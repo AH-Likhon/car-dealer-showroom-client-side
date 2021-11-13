@@ -28,7 +28,7 @@ const Login = () => {
 
     const handleLogin = e => {
         loginUser(loginData.email, loginData.password, location, history);
-        // loginUser(loginData.email, loginData.password);
+
         e.preventDefault();
     }
 

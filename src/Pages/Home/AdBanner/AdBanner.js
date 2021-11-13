@@ -1,19 +1,8 @@
 import { Button, Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
-import bg from '../../../images/login-bg.png';
 import man from '../../../images/man.png';
 import woman from '../../../images/woman.png';
-
-const adBanner = {
-    background: `url(${bg})`,
-    // backgroundColor: 'rgba(45, 58, 74, 0.9)',
-    // backgroundBlendMode: 'darken, luminosity',
-    // marginTop: 175
-    // backgroundPosition: 'cover',
-    // backgroundRepeat: 'no-repeat',
-    height: '450px'
-}
 
 const AdBanner = () => {
     return (
@@ -35,9 +24,9 @@ const AdBanner = () => {
                 <Box sx={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
 
                     <div>
-                        <Typography variant="h6" sx={{ color: 'white', fontWeight: 'bold', mb: 2 }}>ARE YOU LOOKING FOR A CAR?</Typography>
+                        <Typography variant="h6" sx={{ color: 'white', fontWeight: 'bold', mb: 2 }}>DO YOU WANT TO SELL YOUR CAR ?</Typography>
                         <Typography variant="p" sx={{ color: 'white', mb: 2 }}>
-                            Search your car in our Inventory and request a quote on the vehicle of your choosing.
+                            The vehicle of your choosing search your car in our Inventory and request a quote on.
                         </Typography>
                         <Button sx={{ textDecoration: 'none', backgroundColor: 'white', color: '#cf2626d6', width: '100px', mt: 2 }}>Contact</Button>
                     </div>

@@ -22,11 +22,6 @@ const Review = (props) => {
                         fullSymbol="fas fa-star"
                         readonly
                     ></Rating>
-
-                    {/* <Typography sx={{ my: 2 }} variant="body2" color="text.secondary">
-                        <i style={{ color: 'red' }} className="fas fa-quote-left"></i> <span style={{ mt: 5 }}>{review}</span>
-                        <i style={{ color: 'red' }} className="fas fa-quote-right"></i>
-                    </Typography> */}
                 </CardContent>
             </Card>
         </Grid>
