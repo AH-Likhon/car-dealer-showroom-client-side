@@ -3,18 +3,8 @@ import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
-import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
 import {
     Switch,
@@ -22,9 +12,6 @@ import {
     Link,
     useRouteMatch
 } from "react-router-dom";
-// import DashboardHome from '../DashboardHome/DashboardHome';
-// import MakeAdmin from '../MakeAdmin/MakeAdmin';
-// import AddDoctor from '../AddDoctor/AddDoctor';
 import useAuth from '../../../hooks/useAuth';
 import AdminRoute from '../../Login/AdminRoute/AdminRoute';
 import MyOrders from '../../Dashbaord/MyOrders/MyOrders';
@@ -41,7 +28,7 @@ const drawerWidth = 200;
 function Dashboard(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const { admin } = useAuth();
+    const { admin, logOut } = useAuth();
 
     let { path, url } = useRouteMatch();
 
@@ -56,9 +43,11 @@ function Dashboard(props) {
             <Link to={`${url}`} style={{ textDecoration: 'none' }}><Button color="inherit">My Orders</Button></Link>
             {
                 !admin && <Box>
-                <Link to={`${url}/addReview`} style={{ textDecoration: 'none' }}><Button color="inherit">Add A Review</Button></Link>
-            <br />
-            <Link to={`${url}/pay`} style={{ textDecoration: 'none' }}><Button color="inherit">Pay</Button></Link>
+                    <Link to={`${url}/addReview`} style={{ textDecoration: 'none' }}><Button color="inherit">Add A Review</Button></Link>
+                    <br />
+                    <Link to={`${url}/pay`} style={{ textDecoration: 'none' }}><Button color="inherit">Pay</Button></Link>
+                    <br />
+                    <Link to="/" style={{ textDecoration: 'none' }}><Button onClick={logOut} color="inherit">LogOut</Button></Link>
                 </Box>
             }
 
@@ -68,19 +57,10 @@ function Dashboard(props) {
                     <Link to={`${url}/addNewCars`} style={{ textDecoration: 'none' }}><Button color="inherit">Add New Cars</Button></Link>
                     <Link to={`${url}/manageCars`} style={{ textDecoration: 'none' }}><Button color="inherit">Manage Cars</Button></Link>
                     <Link to={`${url}/makeAdmin`} style={{ textDecoration: 'none' }}><Button color="inherit">Make Admin</Button></Link>
+                    <br />
+                    <Link to="/" style={{ textDecoration: 'none' }}><Button onClick={logOut} color="inherit">LogOut</Button></Link>
                 </Box>
             }
-
-            {/* <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>
-                            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                        </ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
-            </List> */}
         </div>
     );
 
@@ -97,20 +77,6 @@ function Dashboard(props) {
                 }}
             >
                 <Navigation></Navigation>
-                {/* <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        edge="start"
-                        onClick={handleDrawerToggle}
-                        sx={{ mr: 2, display: { sm: 'none' } }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" noWrap component="div">
-                        Dashbaord
-                    </Typography>
-                </Toolbar> */}
             </AppBar>
             <Box
                 component="nav"

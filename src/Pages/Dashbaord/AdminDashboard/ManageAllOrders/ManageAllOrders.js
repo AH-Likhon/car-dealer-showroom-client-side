@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import useAuth from '../../../../hooks/useAuth';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -8,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button, FormControl, InputLabel, Link, MenuItem, Select } from '@mui/material';
+import { Button } from '@mui/material';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -30,25 +29,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 const ManageAllOrders = () => {
-    const { user, token } = useAuth();
+
     const [orders, setOrders] = useState([]);
-    // console.log(user.email);
 
-    // const [singleOrder, setSingleOrder] = useState({});
 
-    // const handleChange = (event) => {
-    //     setAge(event.target.value);
-    // };
 
     useEffect(() => {
         const url = `http://localhost:5000/allOrders`;
-        fetch(url
-            //     ,{
-            //     headers: {
-            //         'authorization': `Bearer ${token}`
-            //     }
-            // }
-        )
+        fetch(url)
             .then(res => res.json())
             .then(data => setOrders(data))
     }, []);
@@ -75,43 +63,22 @@ const ManageAllOrders = () => {
 
 
 
-
-    // const handleOnChange = e => {
-    //     const updateValue = e.target.value;
-    //     const updateOrder = { ...orders };
-    //     setSingleOrder.status = updateValue;
-    //     setSingleOrder(updateOrder);
-    //     console.log(singleOrder);
-    // }
-
-    // useEffect((id) => {
-    //     const url = `http://localhost:5000/orders/${id}`;
-    //     console.log(id);
-
-    //     fetch(url)
-    //         .then(res => res.json())
-    //         .then(data => setSingleOrder(data))
-    // }, [singleOrder]);
-
     const handleUpdate = (id) => {
-        // const proceed = window.confirm('Do you want to update?');
-        // if (proceed) {
-        //     fetch(`http://localhost:5000/orders/${id}`, {
-        //         method: "PUT",
-        //         headers: { "content-type": "application/json" },
-        //         body: JSON.stringify(singleOrder)
-        //     })
-        //         .then((res) => res.json())
-        //         .then((data) => {
-        //             console.log(data);
-        //             if (data.modifiedCount) {
-        //                 alert('Succesfully Updated');
-        //                 // const remaining = orders.filter(book => book._id !== id);
-        //                 // setOrders(remaining);
-        //                 setSingleOrder(singleOrder);
-        //             }
-        //         });
-        // }
+        const proceed = window.confirm('Do you want to update?');
+        if (proceed) {
+            fetch(`http://localhost:5000/orders/${id}`, {
+                method: "PUT",
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify(orders)
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log(data);
+                    if (data.modifiedCount) {
+                        alert('Succesfully Updated');
+                    }
+                });
+        }
         console.log(id);
     };
 
@@ -125,34 +92,23 @@ const ManageAllOrders = () => {
 
                             <StyledTableCell align="center">Email</StyledTableCell>
                             <StyledTableCell align="center">Car Model</StyledTableCell>
-                            <StyledTableCell align="center">Update Status</StyledTableCell>
+                            <StyledTableCell align="center">Status</StyledTableCell>
+
                             <StyledTableCell align="center">Action</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {orders.map((row) => (
                             <StyledTableRow key={row._id}>
-                                {/* <StyledTableCell align="center" component="th" scope="row">
-                                    {row.name}
-                                </StyledTableCell> */}
+
                                 <StyledTableCell align="center">{row.email}</StyledTableCell>
                                 <StyledTableCell align="center">{row.model}</StyledTableCell>
+
+
                                 <StyledTableCell align="center">
-                                    <FormControl sx={{ m: 1, minWidth: 80 }}>
-                                        {/* <InputLabel id="demo-simple-select-label">Age</InputLabel> */}
-                                        {/* <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            value={singleOrder?.status}
-                                            label={singleOrder?.status}
-                                            onChange={() => handleUpdate(row._id)}
-                                        >
-                                            <MenuItem onChange={() => handleOnChange(row._id)} value="Pending">Pending</MenuItem>
-                                            <MenuItem value="Approved">Approved</MenuItem>
-                                        </Select> */}
-                                        <Link sx={{ color: 'text.primary' }} href={`/updateStatus/${row._id}`} underline="none"><Button style={{ textDecoration: 'none', backgroundColor: '#cf2626d6' }} variant="contained" key={row._id} row={row}>Update</Button></Link>
-                                    </FormControl>
+                                    <Button onClick={() => handleUpdate(row._id)} style={{ textDecoration: 'none', backgroundColor: '#cf2626d6' }} variant="contained" >{row.status}</Button>
                                 </StyledTableCell>
+
                                 <StyledTableCell align="center">
                                     <Button onClick={() => handleDelete(row._id)} style={{ textDecoration: 'none', backgroundColor: '#cf2626d6' }} variant="contained" >Remove</Button>
                                 </StyledTableCell>

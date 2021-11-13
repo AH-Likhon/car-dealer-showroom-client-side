@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { Container, Divider } from '@mui/material';
+import { Container, Divider, Button, Link } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import FeatureCar from '../FeatureCar/FeatureCar';
 
@@ -34,6 +34,9 @@ const FeatureCars = () => {
                         ></FeatureCar>)
                     }
                 </Grid>
+                <Link href="/allCars" sx={{ width: '150px' }} underline="none">
+                    <Button style={{ textDecoration: 'none', backgroundColor: '#cf2626d6', color: 'white', width: '100px', marginTop: '50px' }}>more Cars</Button>
+                </Link>
             </Container>
         </Box>
     );

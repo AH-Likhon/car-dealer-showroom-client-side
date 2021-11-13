@@ -7,7 +7,6 @@ import {
 import Home from './Pages/Home/Home/Home';
 import About from './Pages/About/About';
 import AllCars from './Pages/AllCars/AllCars';
-// import Navigation from './Pages/Shared/Navigation/Navigation';
 import Login from './Pages/Login/Login/Login';
 import Register from './Pages/Login/Register/Register';
 import PrivateRoute from './Pages/Login/PrivateRoute/PrivateRoute';
@@ -22,7 +21,6 @@ function App() {
     <div className="App">
       <AuthProvider>
         <Router>
-          {/* <Navigation></Navigation> */}
           <Switch>
             <Route path="/about">
               <About />
@@ -42,12 +40,7 @@ function App() {
             <PrivateRoute path="/dashboard">
               <Dashboard />
             </PrivateRoute>
-            {/* <Route path="/addNewCars">
-              <AddNewCars />
-            </Route> */}
-            {/* <Route path="/manageCars">
-              <ManageCars />
-            </Route> */}
+
             <Route path="/updateStatus/:id">
               <UpdateStatus />
             </Route>

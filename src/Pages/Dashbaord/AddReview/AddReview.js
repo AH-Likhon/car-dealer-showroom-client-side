@@ -1,9 +1,7 @@
-import { Alert, Button, CircularProgress, Container, Grid, TextField, Typography } from '@mui/material';
+import { Button, CircularProgress, Container, Grid, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { NavLink, useLocation, useHistory } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import MenuItem from '@mui/material/MenuItem';
-// import { useForm } from 'react-hook-form';
 import login from '../../../images/login-bg.png';
 
 const bgImage = {
@@ -11,8 +9,7 @@ const bgImage = {
     backgroundPosition: 'cover',
     backgroundColor: 'rgba(45, 58, 74, 0.9)',
     backgroundBlendMode: 'darken, luminosity',
-    height: '100vh',
-    // width: '85vw'
+    height: '100vh'
 }
 
 const reviews = [
@@ -50,7 +47,6 @@ const AddReview = () => {
 
 
     const handleOnChange = e => {
-        // setReview(e.target.value);
         const field = e.target.name;
         const value = e.target.value;
         const newReviewData = { ...initialReview };
@@ -58,7 +54,7 @@ const AddReview = () => {
         setReviewData(newReviewData);
         // console.log(reviewData);
 
-        // e.preventDefault();
+        e.preventDefault();
     }
 
     const handleReview = e => {
@@ -71,8 +67,6 @@ const AddReview = () => {
             .then(data => {
                 if (data.insertedId) {
                     alert('Successfully Added');
-                    // reset();
-                    // console.log(data)
                 }
             });
         e.preventDefault();
@@ -105,23 +99,13 @@ const AddReview = () => {
                             disabled
                             sx={{ width: '75%', m: 1 }}
                             id="standard-basic"
-                            label={initialReview.userName}
+                            label={initialReview.email}
                             type="email"
                             name="email"
                             value={initialReview.email}
                             onChange={handleOnChange}
                             variant="standard"
                         />
-                        {/* <TextField
-                            sx={{ width: '75%', m: 1 }}
-                            id="standard-basic"
-                            label="Write"
-                            type="text"
-                            name="review"
-                            value={reviewData.review}
-                            onChange={handleOnChange}
-                            variant="standard"
-                        /> */}
 
 
                         <TextField
@@ -150,8 +134,6 @@ const AddReview = () => {
                     </form>}
 
                     {isLoading && <CircularProgress />}
-                    {/* {user?.email && <Alert severity="success">Added Review successfully!</Alert>} */}
-                    {/* {authError && <Alert severity="error">{authError}</Alert>} */}
                 </Container>
             </Grid>
 
