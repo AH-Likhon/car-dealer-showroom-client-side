@@ -53,10 +53,13 @@ const Navigation = () => {
                     </Typography>
 
                     <Link sx={{ color: 'text.primary' }} href="/allCars" underline="none"><Button color="inherit">All Cars</Button></Link>
-                    {/* <Link sx={{ color: 'text.primary' }} href="/about" underline="none"><Button color="inherit">About</Button></Link> */}
+
+
+
                     {
                         user?.email ?
                             <Box>
+
                                 <IconButton
                                     size="large"
                                     aria-label="account of current user"
@@ -83,9 +86,12 @@ const Navigation = () => {
                                     open={Boolean(anchorEl)}
                                     onClose={handleClose}
                                 >
-                                    <Link sx={{ color: 'text.primary' }} href="/allCars" underline="none"><Button onClick={handleClose} color="inherit">All Cars</Button></Link> <br />
+
+                                    <Link sx={{ color: 'text.primary' }} href="/dashboard" underline="none"><Button onClick={handleClose} color="inherit">{user?.displayName}</Button></Link>
+                                    <br />
                                     <Link sx={{ color: 'text.primary' }} href="/dashboard" underline="none"><Button onClick={handleClose} color="inherit">Dashboard</Button></Link>
                                     <br />
+
                                     <Button onClick={logOut} color="inherit">LogOut</Button>
                                 </Menu>
                             </Box>

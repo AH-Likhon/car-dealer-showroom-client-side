@@ -15,19 +15,25 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { Button, Link } from '@mui/material';
+import { Button } from '@mui/material';
 import {
     Switch,
     Route,
+    Link,
     useRouteMatch
 } from "react-router-dom";
 // import DashboardHome from '../DashboardHome/DashboardHome';
 // import MakeAdmin from '../MakeAdmin/MakeAdmin';
 // import AddDoctor from '../AddDoctor/AddDoctor';
-// import useAuth from '../../../hooks/useAuth';
-// import AdminRoute from '../../Login/AdminRoute/AdminRoute';
-import About from '../../About/About';
+import useAuth from '../../../hooks/useAuth';
+import AdminRoute from '../../Login/AdminRoute/AdminRoute';
+import MyOrders from '../../Dashbaord/MyOrders/MyOrders';
+import MakeAdmin from '../../Dashbaord/AdminDashboard/MakeAdmin/MakeAdmin';
+import ManageAllOrders from '../AdminDashboard/ManageAllOrders/ManageAllOrders';
+import AddNewCars from '../AdminDashboard/AddNewCars/AddNewCars';
+import ManageCars from '../AdminDashboard/ManageCars/ManageCars';
 import Navigation from '../../Shared/Navigation/Navigation';
+import Pay from '../Pay/Pay';
 import AddReview from '../AddReview/AddReview';
 
 const drawerWidth = 200;
@@ -35,7 +41,7 @@ const drawerWidth = 200;
 function Dashboard(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    // const { admin } = useAuth();
+    const { admin } = useAuth();
 
     let { path, url } = useRouteMatch();
 
@@ -45,19 +51,26 @@ function Dashboard(props) {
 
     const drawer = (
         <div>
-
             <Toolbar />
-            <Link href="/appointment" underline="none"><Button color="inherit">Appointment</Button></Link>
             {/* <Divider /> */}
-            <Link href={`${url}`} underline="none"><Button color="inherit">Dashboard</Button></Link>
-            <Link href={`${url}/addReview`} underline="none"><Button color="inherit">Add A Review</Button></Link>
-            {/* {
-                admin &&  */}
-            <Box>
-                <Link href={`${url}/makeAdmin`} underline="none"><Button color="inherit" >Make Admin</Button></Link>
-                <Link href={`${url}/addDoctor`} underline="none"><Button color="inherit">Add Doctor</Button></Link>
-            </Box>
-            {/* } */}
+            <Link to={`${url}`} style={{ textDecoration: 'none' }}><Button color="inherit">My Orders</Button></Link>
+            {
+                !admin && <Box>
+                <Link to={`${url}/addReview`} style={{ textDecoration: 'none' }}><Button color="inherit">Add A Review</Button></Link>
+            <br />
+            <Link to={`${url}/pay`} style={{ textDecoration: 'none' }}><Button color="inherit">Pay</Button></Link>
+                </Box>
+            }
+
+            {
+                admin && <Box>
+                    <Link to={`${url}/manageAllOrders`} style={{ textDecoration: 'none' }}><Button color="inherit">Manage All Orders</Button></Link>
+                    <Link to={`${url}/addNewCars`} style={{ textDecoration: 'none' }}><Button color="inherit">Add New Cars</Button></Link>
+                    <Link to={`${url}/manageCars`} style={{ textDecoration: 'none' }}><Button color="inherit">Manage Cars</Button></Link>
+                    <Link to={`${url}/makeAdmin`} style={{ textDecoration: 'none' }}><Button color="inherit">Make Admin</Button></Link>
+                </Box>
+            }
+
             {/* <List>
                 {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                     <ListItem button key={text}>
@@ -97,7 +110,6 @@ function Dashboard(props) {
                     <Typography variant="h6" noWrap component="div">
                         Dashbaord
                     </Typography>
-                    
                 </Toolbar> */}
             </AppBar>
             <Box
@@ -138,21 +150,30 @@ function Dashboard(props) {
                 <Toolbar />
 
                 <Switch>
-                    {/* <Route exact path={path}>
-                        <DashboardHome></DashboardHome>
-                    </Route> */}
-                    <Route exact path={`${path}/about`}>
-                        <About></About>
+                    <Route exact path={path}>
+                        <MyOrders></MyOrders>
                     </Route>
-                    <Route exact path={`${path}/addReview`}>
+                    <AdminRoute path={`${path}/makeAdmin`}>
+                        <MakeAdmin></MakeAdmin>
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/manageAllOrders`}>
+                        <ManageAllOrders></ManageAllOrders>
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/manageCars`}>
+                        <ManageCars></ManageCars>
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/addNewCars`}>
+                        <AddNewCars></AddNewCars>
+                    </AdminRoute>
+                    <Route path={`${path}/addReview`}>
                         <AddReview></AddReview>
                     </Route>
-                    {/* <AdminRoute path={`${path}/makeAdmin`}>
-                        <MakeAdmin></MakeAdmin>
-                    </AdminRoute> */}
-                    {/* <AdminRoute path={`${path}/addDoctor`}>
-                        <AddDoctor></AddDoctor>
-                    </AdminRoute> */}
+                    <Route path={`${path}/pay`}>
+                        <Pay></Pay>
+                    </Route>
+                    <AdminRoute path={`${path}/addNewCars`}>
+                        <AddNewCars></AddNewCars>
+                    </AdminRoute>
                 </Switch>
             </Box>
         </Box>

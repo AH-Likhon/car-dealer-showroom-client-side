@@ -5,6 +5,7 @@ import { useParams } from 'react-router';
 import useAuth from '../../hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import login from '../../images/login-bg.png';
+import Navigation from '../Shared/Navigation/Navigation';
 
 const style = {
     position: 'absolute',
@@ -47,6 +48,7 @@ const BuyNow = () => {
     // console.log(orderCar);
 
     const onSubmit = (data) => {
+        data.email = `${user.email}`;
         data.status = "Pending";
         data.name = `${user.displayName}`;
         data.model = `${orderCar.model}`;
@@ -107,6 +109,7 @@ const BuyNow = () => {
 
     return (
         <Box sx={bgImage}>
+            <Navigation></Navigation>
             <Box sx={style}>
                 <Typography id="transition-modal-title" variant="h6" component="h2">
                     {/* {name} */}
@@ -118,10 +121,10 @@ const BuyNow = () => {
                     {/* <input defaultValue={user.displayName} {...register("name", { required: true })} style={{ padding: 8, margin: 2, border: 'none', borderRadius: '6px', width: '75%' }} />
                     <br /> */}
 
-                    <input defaultValue={user.email} {...register("email", { required: true })} style={{ padding: 8, margin: 2, border: 'none', borderRadius: '6px', width: '75%' }} />
+                    {/* <input value={user.email} {...register("email", { required: true })} style={{ padding: 8, margin: 2, border: 'none', borderRadius: '6px', width: '75%' }} />
                     <br />
 
-                    {errors.exampleRequired && <span className="error">This field is required</span>}
+                    {errors.exampleRequired && <span className="error">This field is required</span>} */}
 
                     {/* <input defaultValue={orderCar.model} {...register("model", { required: true })} style={{ padding: 8, margin: 2, border: 'none', borderRadius: '6px', width: '75%' }} />
                     <br /> */}

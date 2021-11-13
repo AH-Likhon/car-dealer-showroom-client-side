@@ -8,6 +8,7 @@ import Reviews from '../Reviews/Reviews';
 const Home = () => {
     return (
         <div>
+            <Navigation></Navigation>
             <Banner></Banner>
             <FeatureCars></FeatureCars>
             <Reviews></Reviews>

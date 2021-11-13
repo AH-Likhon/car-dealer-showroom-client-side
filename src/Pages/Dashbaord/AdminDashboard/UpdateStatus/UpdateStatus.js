@@ -1,10 +1,10 @@
 import { Alert, Button, CircularProgress, Container, Grid, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { NavLink, useLocation, useHistory } from 'react-router-dom';
-import useAuth from '../../../hooks/useAuth';
+import useAuth from '../../../../hooks/useAuth';
 import MenuItem from '@mui/material/MenuItem';
 // import { useForm } from 'react-hook-form';
-import login from '../../../images/login-bg.png';
+import login from '../../../../images/login-bg.png';
 
 const bgImage = {
     background: `url(${login})`,
@@ -12,41 +12,26 @@ const bgImage = {
     backgroundColor: 'rgba(45, 58, 74, 0.9)',
     backgroundBlendMode: 'darken, luminosity',
     height: '100vh',
-    // width: '85vw'
 }
 
 const reviews = [
     {
-        value: '5',
-        label: '5',
+        value: 'Pending',
+        label: 'Pending',
     },
     {
-        value: '4',
-        label: '4',
-    },
-    {
-        value: '3',
-        label: '3',
-    },
-    {
-        value: '2',
-        label: '2',
-    },
-    {
-        value: '1',
-        label: '1',
-    },
-    {
-        value: '0',
-        label: '0',
-    },
+        value: 'Approved',
+        label: 'Approved',
+    }
 ];
 
-const AddReview = () => {
+const UpdateStatus = ({ row }) => {
+    console.log(row);
+    // const { _id } = row;
     const { user, isLoading } = useAuth();
     const initialReview = { userName: user.displayName, email: user.email, star: '' };
     const [reviewData, setReviewData] = useState(initialReview);
-    console.log(reviewData);
+    // console.log(reviewData);
 
 
     const handleOnChange = e => {
@@ -81,16 +66,16 @@ const AddReview = () => {
     // console.log(reviewData);
 
     return (
-        <Grid style={bgImage} sx={{ width: '1150px', marginTop: '-24px', marginLeft: '-25px' }} container >
+        <Grid style={bgImage} sx={{ width: 'auto', marginRight: '-24px' }} container spacing={12} >
             <Grid item xs={12} md={12}>
-                <Container sx={{ width: '50%', backgroundColor: '#ffffff52', textAlign: 'center', color: 'white', py: 5, mt: 5 }}>
+                <Container sx={{ width: '50%', backgroundColor: '#ffffff52', textAlign: 'center', color: 'white', py: 5 }}>
                     <Typography variant="h4" gutterBottom component="div">
-                        Submit Your Review
+                        Update this order
                     </Typography>
 
 
-                    {!isLoading && <form style={{ marginTop: '30px' }} onSubmit={handleReview}>
-                        <TextField
+                    {!isLoading && <form onSubmit={handleReview}>
+                        {/* <TextField
                             disabled
                             sx={{ width: '75%', m: 1 }}
                             id="standard-basic"
@@ -100,8 +85,8 @@ const AddReview = () => {
                             value={initialReview.userName}
                             onChange={handleOnChange}
                             variant="standard"
-                        />
-                        <TextField
+                        /> */}
+                        {/* <TextField
                             disabled
                             sx={{ width: '75%', m: 1 }}
                             id="standard-basic"
@@ -111,7 +96,7 @@ const AddReview = () => {
                             value={initialReview.email}
                             onChange={handleOnChange}
                             variant="standard"
-                        />
+                        /> */}
                         {/* <TextField
                             sx={{ width: '75%', m: 1 }}
                             id="standard-basic"
@@ -159,4 +144,4 @@ const AddReview = () => {
     );
 };
 
-export default AddReview;
+export default UpdateStatus;

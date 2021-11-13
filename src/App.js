@@ -7,21 +7,22 @@ import {
 import Home from './Pages/Home/Home/Home';
 import About from './Pages/About/About';
 import AllCars from './Pages/AllCars/AllCars';
-import Navigation from './Pages/Shared/Navigation/Navigation';
+// import Navigation from './Pages/Shared/Navigation/Navigation';
 import Login from './Pages/Login/Login/Login';
 import Register from './Pages/Login/Register/Register';
 import PrivateRoute from './Pages/Login/PrivateRoute/PrivateRoute';
 import AuthProvider from './contexts/AuthProvider/AuthProvider';
 import Dashboard from './Pages/Dashbaord/Dashbaord/Dashboard';
 import BuyNow from './Pages/BuyNow/BuyNow';
-// import AddReview from './Pages/Dashbaord/AddReview/AddReview';
+import UpdateStatus from './Pages/Dashbaord/AdminDashboard/UpdateStatus/UpdateStatus';
+
 
 function App() {
   return (
     <div className="App">
       <AuthProvider>
         <Router>
-          <Navigation></Navigation>
+          {/* <Navigation></Navigation> */}
           <Switch>
             <Route path="/about">
               <About />
@@ -38,12 +39,19 @@ function App() {
             <PrivateRoute path="/buyNow/:id">
               <BuyNow />
             </PrivateRoute>
-            <Route path="/dashboard">
+            <PrivateRoute path="/dashboard">
               <Dashboard />
-            </Route>
-            {/* <Route path="/dashboard/addReview">
-              <AddReview />
+            </PrivateRoute>
+            {/* <Route path="/addNewCars">
+              <AddNewCars />
             </Route> */}
+            {/* <Route path="/manageCars">
+              <ManageCars />
+            </Route> */}
+            <Route path="/updateStatus/:id">
+              <UpdateStatus />
+            </Route>
+
             <Route path="/home">
               <Home />
             </Route>

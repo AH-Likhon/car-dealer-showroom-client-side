@@ -40,7 +40,7 @@ const Login = () => {
 
         <Grid style={bgImage} container spacing={2} sx={{ mt: 0, zIndex: 0 }}>
             <Grid item xs={12} md={12}>
-                <Container sx={{ width: '50%', backgroundColor: '#ff000085', textAlign: 'center', color: 'white', marginTop: '50px', py: 5 }}>
+                <Container sx={{ width: '50%', backgroundColor: '#ffffff52', textAlign: 'center', color: 'white', marginTop: '50px', py: 5 }}>
                     <Typography variant="h4" gutterBottom component="div">
                         Please, Login
                     </Typography>

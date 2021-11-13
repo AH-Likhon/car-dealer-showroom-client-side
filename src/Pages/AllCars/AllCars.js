@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid';
 import { Container, Divider } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import FeatureCar from '../Home/FeatureCar/FeatureCar';
+import Navigation from '../Shared/Navigation/Navigation';
 
 const AllCars = () => {
     const [cars, setCars] = useState([]);
@@ -15,6 +16,7 @@ const AllCars = () => {
     }, [])
     return (
         <Box sx={{ flexGrow: 1 }}>
+            <Navigation></Navigation>
             <Container sx={{ textAlign: 'center', my: 5 }}>
                 <Typography sx={{ fontWeight: 400, color: 'text.secondary' }} variant="p" component="div">
                     Check Out Our Recent Cars
