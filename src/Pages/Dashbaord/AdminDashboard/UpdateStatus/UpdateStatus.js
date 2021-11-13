@@ -49,7 +49,7 @@ const UpdateStatus = ({ row }) => {
     }
 
     const handleReview = e => {
-        fetch("http://localhost:5000/orders/", {
+        fetch("https://polar-inlet-21575.herokuapp.com/orders/", {
             method: "PUT",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(reviewData),

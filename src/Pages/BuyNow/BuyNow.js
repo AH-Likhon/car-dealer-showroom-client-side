@@ -36,7 +36,7 @@ const BuyNow = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     useEffect(() => {
-        const url = `http://localhost:5000/allCars/${id}`;
+        const url = `https://polar-inlet-21575.herokuapp.com/allCars/${id}`;
 
         fetch(url)
             .then(res => res.json())
@@ -51,7 +51,7 @@ const BuyNow = () => {
         data.model = `${orderCar.model}`;
         data.price = `${orderCar.newPrice}`;
 
-        fetch("http://localhost:5000/orders", {
+        fetch("https://polar-inlet-21575.herokuapp.com/orders", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(data),

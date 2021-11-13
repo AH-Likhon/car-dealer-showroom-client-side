@@ -58,7 +58,7 @@ const AddReview = () => {
     }
 
     const handleReview = e => {
-        fetch("http://localhost:5000/reviews", {
+        fetch("https://polar-inlet-21575.herokuapp.com/reviews", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(reviewData),

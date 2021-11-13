@@ -35,7 +35,7 @@ const ManageAllOrders = () => {
 
 
     useEffect(() => {
-        const url = `http://localhost:5000/allOrders`;
+        const url = `https://polar-inlet-21575.herokuapp.com/allOrders`;
         fetch(url)
             .then(res => res.json())
             .then(data => setOrders(data))
@@ -44,7 +44,7 @@ const ManageAllOrders = () => {
     const handleDelete = (id) => {
         const proceed = window.confirm('Do you want to delete?');
         if (proceed) {
-            fetch(`http://localhost:5000/orders/${id}`, {
+            fetch(`https://polar-inlet-21575.herokuapp.com/orders/${id}`, {
                 method: "DELETE",
                 headers: { "content-type": "application/json" },
             })
@@ -66,7 +66,7 @@ const ManageAllOrders = () => {
     const handleUpdate = (id) => {
         const proceed = window.confirm('Do you want to update?');
         if (proceed) {
-            fetch(`http://localhost:5000/orders/${id}`, {
+            fetch(`https://polar-inlet-21575.herokuapp.com/orders/${id}`, {
                 method: "PUT",
                 headers: { "content-type": "application/json" },
                 body: JSON.stringify(orders)
@@ -75,7 +75,7 @@ const ManageAllOrders = () => {
                 .then((data) => {
                     console.log(data);
                     if (data.modifiedCount) {
-                        alert('Succesfully Updated');
+                        alert('Succesfully Updated! Check My Orders!!!');
                     }
                 });
         }
