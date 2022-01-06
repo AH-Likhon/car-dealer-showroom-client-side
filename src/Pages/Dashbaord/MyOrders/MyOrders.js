@@ -9,6 +9,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Button } from '@mui/material';
+import Swal from 'sweetalert2';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -43,23 +44,42 @@ const MyOrders = () => {
     }, [user.email]);
 
     const handleDelete = (id) => {
-        const proceed = window.confirm('Do you want to delete?');
-        if (proceed) {
-            fetch(`https://polar-inlet-21575.herokuapp.com/orders/${id}`, {
-                method: "DELETE",
-                headers: { "content-type": "application/json" },
-            })
-                .then((res) => res.json())
-                .then((data) => {
-                    console.log(data);
-                    if (data.deletedCount) {
-                        alert('Succesfully Deleted');
-                        const remaining = myOrders.filter(book => book._id !== id);
-                        setMyOrders(remaining);
-                    }
-                });
-        }
-        console.log(id);
+        // const proceed = window.confirm('Do you want to delete?');
+
+        Swal.fire({
+            title: 'Do you want to delete this order?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Delete',
+            denyButtonText: `Don't Delete`,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                fetch(`https://polar-inlet-21575.herokuapp.com/orders/${id}`, {
+                    method: "DELETE",
+                    headers: { "content-type": "application/json" },
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        console.log(data);
+                        if (data.deletedCount) {
+                            // alert('Succesfully Deleted');
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Succesfully Deleted This Order!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                            const remaining = myOrders.filter(book => book._id !== id);
+                            setMyOrders(remaining);
+                        }
+                    });
+            } else if (result.isDenied) {
+                Swal.fire("You didn't agree to update order status!", '', 'info')
+            }
+        })
+
+        // console.log(id);
     };
 
     return (

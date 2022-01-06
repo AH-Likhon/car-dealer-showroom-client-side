@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
 import MenuItem from '@mui/material/MenuItem';
 import login from '../../../images/login-bg.png';
+import Swal from 'sweetalert2';
 
 const bgImage = {
     background: `url(${login})`,
@@ -222,7 +223,7 @@ const reviews = [
 
 const AddReview = () => {
     const { user, isLoading } = useAuth();
-    const initialReview = { userName: user.displayName, email: user.email, star: '' };
+    const initialReview = { userName: user.displayName, email: user.email, };
     const [reviewData, setReviewData] = useState(initialReview);
     console.log(reviewData);
 
@@ -230,13 +231,15 @@ const AddReview = () => {
     const handleOnChange = e => {
         const field = e.target.name;
         const value = e.target.value;
-        const newReviewData = { ...initialReview };
+        const newReviewData = { ...reviewData };
         newReviewData[field] = value;
         setReviewData(newReviewData);
-        // console.log(reviewData);
+
+        console.log(reviewData);
 
         e.preventDefault();
     }
+
 
     const handleReview = e => {
         fetch("https://polar-inlet-21575.herokuapp.com/reviews", {
@@ -247,7 +250,13 @@ const AddReview = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.insertedId) {
-                    alert('Successfully Added');
+                    // alert('Successfully Added');
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successfully Submited Your Review!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                 }
             });
         e.preventDefault();
@@ -309,6 +318,20 @@ const AddReview = () => {
                                 </MenuItem>
                             ))}
                         </TextField>
+
+                        <TextField
+                            sx={{ width: '75%', m: 1, fontSize: '50px' }}
+                            id="standard-multiline-static"
+                            label="Details About Review"
+                            value={reviewData.details}
+                            type="text"
+                            name="details"
+                            onChange={handleOnChange}
+                            multiline
+                            rows={4}
+                            // defaultValue="Default Value"
+                            variant="standard"
+                        />
 
 
                         <Button sx={{ width: '75%', m: 1 }} variant="contained" type="submit">Submit</Button>

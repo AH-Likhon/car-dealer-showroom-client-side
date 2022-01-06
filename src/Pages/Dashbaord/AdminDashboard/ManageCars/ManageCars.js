@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Button } from '@mui/material';
+import Swal from 'sweetalert2';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -40,22 +41,40 @@ const ManageCars = () => {
     }, []);
 
     const handleDelete = (id) => {
-        const proceed = window.confirm('Do you want to delete?');
-        if (proceed) {
-            fetch(`https://polar-inlet-21575.herokuapp.com/allCars/${id}`, {
-                method: "DELETE",
-                headers: { "content-type": "application/json" },
-            })
-                .then((res) => res.json())
-                .then((data) => {
-                    console.log(data);
-                    if (data.deletedCount) {
-                        alert('Succesfully Deleted');
-                        const remaining = cars.filter(book => book._id !== id);
-                        setCars(remaining);
-                    }
-                });
-        }
+        // const proceed = window.confirm('Do you want to delete?');
+
+        Swal.fire({
+            title: 'Do you want to delete this car?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Delete',
+            denyButtonText: `Don't Delete`,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                fetch(`https://polar-inlet-21575.herokuapp.com/allCars/${id}`, {
+                    method: "DELETE",
+                    headers: { "content-type": "application/json" },
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        console.log(data);
+                        if (data.deletedCount) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Successfully Deleted This Car!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                            const remaining = cars.filter(book => book._id !== id);
+                            setCars(remaining);
+                        }
+                    });
+            } else if (result.isDenied) {
+                Swal.fire("You didn't agree to delete this car!", '', 'info')
+            }
+        })
+
         // console.log(id);
     };
 

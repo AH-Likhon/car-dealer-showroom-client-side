@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import login from '../../images/login-bg.png';
 import Navigation from '../Shared/Navigation/Navigation';
 import Footer from '../Shared/Footer/Footer';
+import Swal from 'sweetalert2';
 
 const style = {
     position: 'absolute',
@@ -60,7 +61,13 @@ const BuyNow = () => {
             .then(result => {
                 // console.log(result);
                 if (result.insertedId) {
-                    alert('Successfully Purchased!');
+                    // alert('Successfully Purchased!');
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successfully Purchased!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                     console.log(result);
                     reset();
                 }

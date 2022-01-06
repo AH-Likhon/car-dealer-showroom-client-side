@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import useAuth from '../../../../hooks/useAuth';
 import bgImage from '../../../../images/login-bg.png';
 import { Container, Grid, Typography } from '@mui/material';
+import Swal from 'sweetalert2';
 
 const backgroundImage = {
     background: `url(${bgImage})`,
@@ -25,7 +26,13 @@ const AddNewCars = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.insertedId) {
-                    alert('Successfully Added');
+                    // alert('Successfully Added');
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successfully Added A New Car!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                     reset();
                 }
             });

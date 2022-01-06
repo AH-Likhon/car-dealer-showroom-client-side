@@ -4,6 +4,7 @@ import useAuth from '../../../../hooks/useAuth';
 import MenuItem from '@mui/material/MenuItem';
 import login from '../../../../images/login-bg.png';
 import Navigation from '../../../Shared/Navigation/Navigation';
+import Swal from 'sweetalert2';
 
 const bgImage = {
     background: `url(${login})`,
@@ -40,7 +41,7 @@ const UpdateStatus = ({ row }) => {
     const handleOnChange = e => {
         const field = e.target.name;
         const value = e.target.value;
-        const newReviewData = { ...initialReview };
+        const newReviewData = { ...reviewData };
         newReviewData[field] = value;
         setReviewData(newReviewData);
         // console.log(reviewData);
@@ -57,7 +58,13 @@ const UpdateStatus = ({ row }) => {
             .then(res => res.json())
             .then(data => {
                 if (data.insertedId) {
-                    alert('Successfully Added');
+                    // alert('Successfully Added');
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Succesfully Added!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                     // reset();
                     // console.log(data)
                 }
@@ -98,6 +105,21 @@ const UpdateStatus = ({ row }) => {
                                 </MenuItem>
                             ))}
                         </TextField>
+
+                        <TextField
+                            sx={{ width: '75%', m: 1, fontSize: '50px' }}
+                            id="standard-multiline-static"
+                            label="Details About Review"
+                            value={reviewData.details}
+                            type="text"
+                            name="details"
+                            onChange={handleOnChange}
+                            multiline
+                            rows={4}
+                            // defaultValue="Default Value"
+                            variant="standard"
+                        />
+
 
 
                         <Button sx={{ width: '75%', m: 1 }} variant="contained" type="submit">Submit</Button>

@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Rating from 'react-rating';
 
 const Review = (props) => {
-    const { userName, star } = props.review;
+    const { userName, star, details } = props.review;
     return (
         <Grid item sx={{ mt: 5 }} xs={4} sm={4} md={4}>
             <Card sx={{ minWidth: 275 }}>
@@ -22,6 +22,11 @@ const Review = (props) => {
                         fullSymbol="fas fa-star"
                         readonly
                     ></Rating>
+
+                    <Typography sx={{ color: 'black', mt: '10px' }} variant="p" component="div">
+                        {details}
+                    </Typography>
+
                 </CardContent>
             </Card>
         </Grid>
