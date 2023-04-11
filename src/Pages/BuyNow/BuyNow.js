@@ -37,7 +37,7 @@ const BuyNow = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     useEffect(() => {
-        const url = `https://polar-inlet-21575.herokuapp.com/allCars/${id}`;
+        const url = `https://car-dealer-server-7tcl.onrender.com/allCars/${id}`;
 
         fetch(url)
             .then(res => res.json())
@@ -52,7 +52,7 @@ const BuyNow = () => {
         data.model = `${orderCar.model}`;
         data.price = `${orderCar.newPrice}`;
 
-        fetch("https://polar-inlet-21575.herokuapp.com/orders", {
+        fetch("https://car-dealer-server-7tcl.onrender.com/orders", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(data),

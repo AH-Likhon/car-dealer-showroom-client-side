@@ -10,7 +10,7 @@ const FeatureCars = () => {
     const [cars, setCars] = useState([]);
 
     useEffect(() => {
-        fetch('https://polar-inlet-21575.herokuapp.com/allCars')
+        fetch('https://car-dealer-server-7tcl.onrender.com/allCars')
             .then(res => res.json())
             .then(data => setCars(data));
     }, [])

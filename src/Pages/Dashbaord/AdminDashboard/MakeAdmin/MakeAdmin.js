@@ -12,7 +12,7 @@ const MakeAdmin = () => {
     const handleAdminSubmit = e => {
         const user = { email };
 
-        fetch('https://polar-inlet-21575.herokuapp.com/users/admin', {
+        fetch('https://car-dealer-server-7tcl.onrender.com/users/admin', {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

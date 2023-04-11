@@ -242,7 +242,7 @@ const AddReview = () => {
 
 
     const handleReview = e => {
-        fetch("https://polar-inlet-21575.herokuapp.com/reviews", {
+        fetch("https://car-dealer-server-7tcl.onrender.com/reviews", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(reviewData),

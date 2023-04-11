@@ -18,7 +18,7 @@ const AddNewCars = () => {
 
     const onSubmit = (data) => {
         data.email = user?.email;
-        fetch("https://polar-inlet-21575.herokuapp.com/allCars", {
+        fetch("https://car-dealer-server-7tcl.onrender.com/allCars", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(data),

@@ -50,7 +50,7 @@ const UpdateStatus = ({ row }) => {
     }
 
     const handleReview = e => {
-        fetch("https://polar-inlet-21575.herokuapp.com/orders/", {
+        fetch("https://car-dealer-server-7tcl.onrender.com/orders/", {
             method: "PUT",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(reviewData),

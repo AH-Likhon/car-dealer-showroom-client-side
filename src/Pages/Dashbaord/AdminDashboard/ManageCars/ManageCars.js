@@ -34,7 +34,7 @@ const ManageCars = () => {
     const [cars, setCars] = useState([]);
 
     useEffect(() => {
-        const url = `https://polar-inlet-21575.herokuapp.com/allCars`;
+        const url = `https://car-dealer-server-7tcl.onrender.com/allCars`;
         fetch(url)
             .then(res => res.json())
             .then(data => setCars(data))
@@ -52,7 +52,7 @@ const ManageCars = () => {
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                fetch(`https://polar-inlet-21575.herokuapp.com/allCars/${id}`, {
+                fetch(`https://car-dealer-server-7tcl.onrender.com/allCars/${id}`, {
                     method: "DELETE",
                     headers: { "content-type": "application/json" },
                 })

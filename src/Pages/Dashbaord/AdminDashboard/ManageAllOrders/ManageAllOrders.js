@@ -36,7 +36,7 @@ const ManageAllOrders = () => {
 
 
     useEffect(() => {
-        const url = `https://polar-inlet-21575.herokuapp.com/allOrders`;
+        const url = `https://car-dealer-server-7tcl.onrender.com/allOrders`;
         fetch(url)
             .then(res => res.json())
             .then(data => setOrders(data))
@@ -53,7 +53,7 @@ const ManageAllOrders = () => {
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                fetch(`https://polar-inlet-21575.herokuapp.com/orders/${id}`, {
+                fetch(`https://car-dealer-server-7tcl.onrender.com/orders/${id}`, {
                     method: "DELETE",
                     headers: { "content-type": "application/json" },
                 })
@@ -94,7 +94,7 @@ const ManageAllOrders = () => {
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                fetch(`https://polar-inlet-21575.herokuapp.com/orders/${id}`, {
+                fetch(`https://car-dealer-server-7tcl.onrender.com/orders/${id}`, {
                     method: "PUT",
                     headers: { "content-type": "application/json" },
                     body: JSON.stringify(orders)

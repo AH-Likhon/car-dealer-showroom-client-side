@@ -10,7 +10,7 @@ const Reviews = () => {
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
-        fetch('https://polar-inlet-21575.herokuapp.com/reviews')
+        fetch('https://car-dealer-server-7tcl.onrender.com/reviews')
             .then(res => res.json())
             .then(data => setReviews(data));
     }, [])
